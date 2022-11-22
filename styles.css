@@ -6,9 +6,14 @@ canvas#responsive-canvas {
     top: 0;
 }
 
-body {
-    background-color: rgb(190, 190, 190);
-    display: table;
+.controls {
+    position: absolute;
+    width: 100px;
+    background-color: seashell;
+    padding: 6px;
+    border-radius: 16px;
+    bottom: 50px;
+    right: 50px;
 }
 
 .loading {
@@ -21,22 +26,67 @@ body {
     align-items: center;
 }
 
+body {
+    background-color: rgb(190, 190, 190);
+    font-family: "Montserrat", sans-serif;
+    font-size: 10pt;
+}
+
+.contact-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    line-height: 1;
+    padding-bottom: 12px;
+}
+
+svg {
+    padding-right: 10px;
+    padding-top: 12px;
+}
+
+a {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-height: 36px;
+    text-decoration: none;
+    color: black;
+}
+
 .info {
-    position: absolute;
-    width: 160px;
-    background-color: antiquewhite;
+    position: fixed;
+    width: 310px;
+    background-color: seashell;
     padding: 10px;
     border-radius: 16px;
     top: 50px;
     left: 50px;
 }
 
-.controls {
-    position: absolute;
-    width: 100px;
-    background-color: antiquewhite;
-    padding: 10px;
-    border-radius: 16px;
-    bottom: 50px;
-    right: 50px;
+@media screen and (max-width: 430px) {
+    body {
+        font-size: 8pt;
+        min-width: 290px;
+    }
+    .info {
+        width: auto;
+    }
+    .controls {
+        width: auto;
+    }
+    h3 {
+        line-height: 1;
+        padding-bottom: 6px;
+    }
+    svg {
+        padding-right: 12px;
+        padding-top: 6px;
+    }
+    .italics {
+        visibility: hidden;
+    }
 }
