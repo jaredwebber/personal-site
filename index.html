@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Jared Webber</title>
+        <link rel="shortcut icon" type="image/jpg" href="favicon/favicon.ico" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <!-- Reference Site: https://bryanhaggerty.com -->
+    <!-- Possible Canvas Optimizations: https://gist.github.com/jaredwilli/5469626-->
+    <body>
+        <div class="loading">
+            <h1 id="loading-message">LOADING</h1>
+            <canvas id="responsive-canvas"></canvas>
+            <div class="container">
+                <div class="card info">
+                    <!-- Replace Text With Icons? -->
+                    <h3>
+                        <a
+                            href="https://www.linkedin.com/in/jaredwebber/"
+                            target="_blank"
+                            >LinkedIn</a
+                        >
+                    </h3>
+                    <h3>
+                        <a href="https://github.com/jaredwebber" target="_blank"
+                            >GitHub</a
+                        >
+                    </h3>
+                    <h3>
+                        <a href="https://jaredwebber.dev" target="_blank"
+                            >Website</a
+                        >
+                    </h3>
+                </div>
+                <div class="card controls">
+                    <button onclick="toggleColours()">toggle palette</button>
+                    <button onclick="regenerateBackground()">regenerate</button>
+                    <!-- Option: Add Frame Rate Slider -->
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
