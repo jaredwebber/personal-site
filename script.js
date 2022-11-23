@@ -1,8 +1,8 @@
 const c = document.getElementById("responsive-canvas");
-const ctx = c.getContext('2d', { alpha: false });
+const ctx = c.getContext('2d');
 
 const loadingMessage = document.getElementById("loading-message");
-const body = document.getElementsByTagName("body");
+const loadingBackground = document.getElementById("loading");
 
 window.addEventListener('resize', () => {
     runBackground();
@@ -87,8 +87,8 @@ const MIN_NEIGHBOURS = 1;
 const MAX_NEIGHBOURS = 4;
 const REVIVE = 3;
 const TILE_SIZE = 10;
-const LIFE_FREQ = 0.15;
-const FRAMERATE = 2;
+const LIFE_FREQ = 0.1;
+const FRAMERATE = 3;
 
 var tileColours = GREYSCALE_COLOURS;
 var rows = null;
@@ -126,13 +126,21 @@ class Tile {
 function toggleColours(){
     if(tileColours == BW_COLOURS){
         tileColours = GREYSCALE_COLOURS;
-        document.body.style.backgroundColor = BACKGROUND_COLOURS["GREYSCALE_COLOURS"];
     }else if(tileColours == GREYSCALE_COLOURS){
         tileColours = RGB_COLOURS;
-        document.body.style.backgroundColor = BACKGROUND_COLOURS["RGB_COLOURS"];
     }else{
         tileColours = BW_COLOURS;
-        document.body.style.backgroundColor = BACKGROUND_COLOURS["BW_COLOURS"];
+    }
+    setBackgroundColour();
+}
+
+function setBackgroundColour(){
+    if(tileColours == GREYSCALE_COLOURS){
+        loadingBackground.style.backgroundColor = BACKGROUND_COLOURS["GREYSCALE_COLOURS"];
+    }else if(tileColours == RGB_COLOURS){
+        loadingBackground.style.backgroundColor = BACKGROUND_COLOURS["RGB_COLOURS"];
+        }else{
+        loadingBackground.style.backgroundColor = BACKGROUND_COLOURS["BW_COLOURS"];
     }
 }
 
@@ -153,7 +161,6 @@ function runBackground(){
     c.width = c.clientWidth;
     c.height = c.clientHeight;
     ctx.clearRect(0, 0, c.width, c.height);
-    // rows and cols values are flipped?
     cols = Math.floor((c.height+TILE_SIZE)/TILE_SIZE);
     rows = Math.floor((c.width+TILE_SIZE)/TILE_SIZE);
     initGrids();

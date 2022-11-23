@@ -17,9 +17,11 @@ canvas#responsive-canvas {
 }
 
 .loading {
-    height: 100%;
-    width: 100%;
+    height: 102%;
+    width: 102%;
     position: fixed;
+    left: 0px;
+    top: 0px;
     z-index: -1;
     display: flex;
     justify-content: center;
@@ -36,6 +38,17 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+button {
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    padding: 4px 4px;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 h3 {
