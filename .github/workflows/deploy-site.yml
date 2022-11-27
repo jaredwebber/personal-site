@@ -14,6 +14,6 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@master
         with:
           server: ftp.jaredwebber.dev
-          username: gha@jaredwebber.dev
+          username: github-actions@jaredwebber.dev
           password: ${{ secrets.GHA_FTP_SECRET }}
           dry-run: true
