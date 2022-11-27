@@ -74,10 +74,14 @@ a {
   position: fixed;
   width: 310px;
   background-color: seashell;
-  padding: 10px;
+  padding: 0px 12px 20px 12px;
   border-radius: 16px;
   top: 50px;
   left: 50px;
+}
+
+.italics {
+  font-size: 12px;
 }
 
 @media screen and (max-width: 430px) {
