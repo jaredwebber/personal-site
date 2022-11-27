@@ -17,3 +17,8 @@ jobs:
           username: github-actions@jaredwebber.dev
           password: ${{ secrets.GHA_FTP_SECRET }}
           dry-run: true
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            README.md
