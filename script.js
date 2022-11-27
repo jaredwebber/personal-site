@@ -87,7 +87,7 @@ const MIN_NEIGHBOURS = 1;
 const MAX_NEIGHBOURS = 4;
 const REVIVE = 3;
 const TILE_SIZE = 10;
-const LIFE_FREQ = 0.1;
+const LIFE_FREQ = 0.15;
 const FRAMERATE = 3;
 
 var tileColours = GREYSCALE_COLOURS;
