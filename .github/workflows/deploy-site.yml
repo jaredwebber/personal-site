@@ -13,7 +13,7 @@ jobs:
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@master
         with:
-          server: ftp.jaredwebber.dev
+          server: ${{ secrets.GHA_FTP_DOMAIN }}
           username: github-actions@jaredwebber.dev
           password: ${{ secrets.GHA_FTP_SECRET }}
           dry-run: true
