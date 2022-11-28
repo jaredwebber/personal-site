@@ -16,10 +16,10 @@ jobs:
           action: SamKirkland/FTP-Deploy-Action@master
           with: |
             server: ${{ secrets.GHA_FTP_DOMAIN }}
-            username: github-actions@jaredwebber.dev
+            username: gha@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
             log-level: verbose
-            server-dir: ./
+            server-dir: ./public_html/
             exclude: |
               **/.git*
               **/.git*/**
