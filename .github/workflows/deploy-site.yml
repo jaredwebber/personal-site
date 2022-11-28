@@ -19,9 +19,9 @@ jobs:
             username: github-actions@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
             log-level: verbose
+            server-dir: ./public_html/
             exclude: |
               **/.git*
               **/.git*/**
               README.md
-          attempt_limit: 10
-          attempt_delay: 5000
+          attempt_limit: 15
