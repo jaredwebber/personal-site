@@ -18,6 +18,8 @@ jobs:
             server: ${{ secrets.GHA_FTP_DOMAIN }}
             username: github-actions@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
+            log-level: verbose
+            server-dir: ./public_html/
             exclude: |
               **/.git*
               **/.git*/**
