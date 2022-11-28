@@ -23,4 +23,5 @@ jobs:
               **/.git*
               **/.git*/**
               README.md
-          attempt_limit: 15
+          attempt_limit: 10
+          attempt_delay: 5000
