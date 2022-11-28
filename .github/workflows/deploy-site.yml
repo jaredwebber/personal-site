@@ -18,9 +18,10 @@ jobs:
             server: ${{ secrets.GHA_FTP_DOMAIN }}
             username: github-actions@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
-            dry-run: true
             exclude: |
               **/.git*
               **/.git*/**
               **/node_modules/**
               README.md
+          attempt_limit: 3
+          attempt_delay: 2000
