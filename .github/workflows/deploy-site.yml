@@ -19,6 +19,7 @@ jobs:
             username: gha@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
             log-level: verbose
+            server-dir: ./public_html/
             exclude: |
               **/.git*
               **/.git*/**
