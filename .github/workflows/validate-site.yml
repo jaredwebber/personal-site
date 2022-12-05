@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install Dependencies
-        run: pip install selenium
+        run: pip install selenium webdriver-manager
       - name: Run Tests
         run: python tests/validation_pass.py -v
