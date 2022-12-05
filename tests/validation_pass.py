@@ -25,6 +25,7 @@ def enhance_errors(func):
             func(*args, **kwargs)
         except AssertionError as e:
             e.args = (BrowserManager.browser_name, "".join(e.args))
+            BrowserManager.failures = True
             raise
         try_sleep()
 
@@ -34,6 +35,7 @@ def enhance_errors(func):
 class BrowserManager:
     browser_index: int = 0
     browser_name: str = ""
+    failures: bool = False
 
     @classmethod
     def setup_chrome(cls) -> webdriver.Chrome:
@@ -139,3 +141,6 @@ def suite() -> unittest.TestSuite:
 mySuit = suite()
 runner = unittest.TextTestRunner()
 runner.run(mySuit)
+
+if BrowserManager.failures:
+    raise SystemExit(1)
