@@ -27,4 +27,6 @@ jobs:
         if: steps.restore-cache.outputs.cache-hit != 'true'
         run: pip install selenium webdriver-manager
       - name: Run Tests
+        with:
+          - repo-token: ${{ secrets.GITHUB_TOKEN }}
         run: python tests/validation_pass.py -v
