@@ -3,6 +3,8 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.safari.service import Service as SafariService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
@@ -12,6 +14,12 @@ import unittest
 URL: str = "https://jaredwebber.dev"
 SLEEP: bool = False
 DEFAULT_SLEEP: int = 1
+
+# safari does not support headless
+chrome_options = ChromeOptions()
+chrome_options.headless = True
+firefox_options = FirefoxOptions()
+firefox_options.headless = True
 
 
 def try_sleep(duration: int = DEFAULT_SLEEP) -> None:
@@ -25,6 +33,7 @@ def enhance_errors(func):
             func(*args, **kwargs)
         except AssertionError as e:
             e.args = (BrowserManager.browser_name, "".join(e.args))
+            BrowserManager.failures = True
             raise
         try_sleep()
 
@@ -34,16 +43,23 @@ def enhance_errors(func):
 class BrowserManager:
     browser_index: int = 0
     browser_name: str = ""
+    failures: bool = False
 
     @classmethod
     def setup_chrome(cls) -> webdriver.Chrome:
         cls.browser_name = "Chrome"
-        return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        return webdriver.Chrome(
+            service=ChromeService(ChromeDriverManager().install()),
+            options=chrome_options,
+        )
 
     @classmethod
     def setup_firefox(cls) -> webdriver.Firefox:
         cls.browser_name = "Firefox"
-        return webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        return webdriver.Firefox(
+            service=FirefoxService(GeckoDriverManager().install()),
+            options=firefox_options,
+        )
 
     @classmethod
     def setup_safari(cls) -> webdriver.Safari:
@@ -81,42 +97,47 @@ class TestBrowser(unittest.TestCase):
     @enhance_errors
     def test__validate_card_title(self) -> None:
         # ensure card title is correct
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__validate_github_link(self) -> None:
         # ensure gh link is correct
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__validate_linkedin_link(self) -> None:
         # ensure linkedin link is correct
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__validate_email_link(self) -> None:
         # ensure email link is correct
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__validate_website_link(self) -> None:
         # ensure web link is correct
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__regenerate_button(self) -> None:
         # button is visible, and doesnt break anything?
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__toggle_palette_button(self) -> None:
         # button is visible, and doesnt break anything?
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
 
     @enhance_errors
     def test__mobile_formatting(self) -> None:
         # look at css tags?
-        self.assertEqual(0, 1)
+        self.assertTrue(False)
+
+    @enhance_errors
+    def test__validate_number_of_elements(self) -> None:
+        # check html contains expected number of elements
+        self.assertTrue(False)
 
 
 # Placeholder which forces TestBrowser to tearDown
@@ -139,3 +160,6 @@ def suite() -> unittest.TestSuite:
 mySuit = suite()
 runner = unittest.TextTestRunner()
 runner.run(mySuit)
+
+if BrowserManager.failures:
+    raise SystemExit(1)

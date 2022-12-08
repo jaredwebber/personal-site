@@ -1,17 +1,29 @@
 on:
-  push:
-    branches:
-      - main
-# schedule:
-#   - cron: 0 0 * * 0
+  schedule:
+    - cron: "0 0 * * 0"
 name: Validate Site
 jobs:
   test:
+    name: Test
     runs-on: macos-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - run: python ../tests/validation_pass.py -v
+      - name: Restore Cache
+        id: restore-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/Library/Caches/pip
+          key: ${{ runner.os }}
+          restore-keys: ${{ runner.os }}
+      - name: Install Dependencies
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: pip install selenium webdriver-manager
+      - name: Run Tests
+        run: python tests/validation_pass.py -v
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
