@@ -96,28 +96,56 @@ class TestBrowser(unittest.TestCase):
 
     @enhance_errors
     def test__validate_card_title(self) -> None:
-        # ensure card title is correct
-        self.assertTrue(False)
+        self.assertEqual(
+            "Jared Webber", self.browser.find_element(By.TAG_NAME, "h2").text
+        )
 
     @enhance_errors
     def test__validate_github_link(self) -> None:
-        # ensure gh link is correct
-        self.assertTrue(False)
+        self.assertEqual(
+            "https://github.com/jaredwebber",
+            self.browser.find_element(
+                By.LINK_TEXT, "github.com/jaredwebber"
+            ).get_attribute("href"),
+        )
 
     @enhance_errors
     def test__validate_linkedin_link(self) -> None:
-        # ensure linkedin link is correct
-        self.assertTrue(False)
+        self.assertEqual(
+            "https://www.linkedin.com/in/jaredwebber/",
+            self.browser.find_element(
+                By.LINK_TEXT, "linkedin.com/in/jaredwebber"
+            ).get_attribute("href"),
+        )
 
     @enhance_errors
     def test__validate_email_link(self) -> None:
-        # ensure email link is correct
-        self.assertTrue(False)
+        self.assertEqual(
+            "mailto:jaredwebberdev@gmail.com",
+            self.browser.find_element(
+                By.LINK_TEXT, "jaredwebberdev@gmail.com"
+            ).get_attribute("href"),
+        )
 
     @enhance_errors
     def test__validate_website_link(self) -> None:
-        # ensure web link is correct
-        self.assertTrue(False)
+        self.assertEqual(
+            "/index.html",
+            self.browser.find_element(
+                By.LINK_TEXT, "jaredwebber.dev - you're here"
+            ).get_attribute("href"),
+        )
+
+    @enhance_errors
+    def test__validate_number_of_elements(self) -> None:
+        self.assertEqual(
+            45 if type(self.browser) is webdriver.Safari else 44,
+            len(
+                self.browser.find_element(By.TAG_NAME, "html").find_elements(
+                    By.XPATH, ".//*"
+                )
+            ),
+        )
 
     @enhance_errors
     def test__regenerate_button(self) -> None:
@@ -132,11 +160,6 @@ class TestBrowser(unittest.TestCase):
     @enhance_errors
     def test__mobile_formatting(self) -> None:
         # look at css tags?
-        self.assertTrue(False)
-
-    @enhance_errors
-    def test__validate_number_of_elements(self) -> None:
-        # check html contains expected number of elements
         self.assertTrue(False)
 
 
