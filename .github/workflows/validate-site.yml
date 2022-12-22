@@ -22,7 +22,6 @@ jobs:
           key: ${{ runner.os }}
           restore-keys: ${{ runner.os }}
       - name: Install Dependencies
-        if: steps.restore-cache.outputs.cache-hit != 'true'
         run: pip install selenium webdriver-manager
       - name: Run Tests
         run: python tests/validation_pass.py -v
