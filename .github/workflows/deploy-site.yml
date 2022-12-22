@@ -3,6 +3,7 @@ on:
     branches:
       - main
 name: Deploy Over FTP
+id: deploy_over_ftp
 jobs:
   deploy:
     name: Deploy
