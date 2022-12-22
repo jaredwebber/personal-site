@@ -152,7 +152,7 @@ class TestBrowser(unittest.TestCase):
             By.ID, "regenerate-background"
         ).get_attribute("onclick")
 
-        self.assertEqual("regenerateBackground", button)
+        self.assertEqual("regenerateBackground()", button)
 
     @enhance_errors
     def test__toggle_palette_button(self) -> None:
@@ -160,7 +160,7 @@ class TestBrowser(unittest.TestCase):
             "onclick"
         )
 
-        self.assertEqual("toggleColours", button)
+        self.assertEqual("toggleColours()", button)
 
 
 # Placeholder which forces TestBrowser to tearDown
