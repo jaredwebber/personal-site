@@ -2,11 +2,12 @@ on:
   push:
     branches:
       - main
+
 name: Deploy Over FTP
-id: deploy_over_ftp
 jobs:
   deploy:
     name: Deploy
+    id: deploy_over_ftp
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
