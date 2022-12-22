@@ -4,6 +4,7 @@ canvas#responsive-canvas {
   position: fixed;
   left: 0;
   top: 0;
+  viewport-fit: cover;
 }
 
 .controls {
@@ -84,7 +85,7 @@ a {
   font-size: 12px;
 }
 
-@media screen and (max-width: 430px) {
+@media (max-width: 430px) {
   body {
     font-size: 8pt;
     min-width: 290px;

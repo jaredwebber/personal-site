@@ -71,6 +71,7 @@ class BrowserManager:
         browsers = [cls.setup_safari, cls.setup_chrome, cls.setup_firefox]
         browser: webdriver = browsers[cls.browser_index]()
         print("\nSetting Up " + cls.browser_name + "...")
+        try_sleep()
         browser.implicitly_wait(12)
         browser.get(URL)
         cls.browser_index += 1
