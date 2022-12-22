@@ -148,18 +148,19 @@ class TestBrowser(unittest.TestCase):
 
     @enhance_errors
     def test__regenerate_button(self) -> None:
-        # button is visible, and doesnt break anything?
-        self.assertTrue(False)
+        button = self.browser.find_element(
+            By.ID, "regenerate-background"
+        ).get_attribute("onclick")
+
+        self.assertEqual("regenerateBackground", button)
 
     @enhance_errors
     def test__toggle_palette_button(self) -> None:
-        # button is visible, and doesnt break anything?
-        self.assertTrue(False)
+        button = self.browser.find_element(By.ID, "toggle-colours").get_attribute(
+            "onclick"
+        )
 
-    @enhance_errors
-    def test__mobile_formatting(self) -> None:
-        # look at css tags?
-        self.assertTrue(False)
+        self.assertEqual("toggleColours", button)
 
 
 # Placeholder which forces TestBrowser to tearDown
