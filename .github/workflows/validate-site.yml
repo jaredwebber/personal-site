@@ -27,4 +27,4 @@ jobs:
       - name: Run Tests
         run: python tests/validation_pass.py -v
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
