@@ -12,9 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: FTP Deploy
-        uses: Wandalen/wretry.action@master
+        uses: Wandalen/wretry.action@e6cf3db7de3777ba5f999f903c2f4efdd9ac7288
         with:
-          action: SamKirkland/FTP-Deploy-Action@3.1.2
+          action: SamKirkland/FTP-Deploy-Action@08c527ecdfa71f83a2ada7d562d6c794d036b168
           with: |
             server: ${{ secrets.GHA_FTP_DOMAIN }}
             username: github-actions@jaredwebber.dev
