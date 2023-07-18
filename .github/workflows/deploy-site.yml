@@ -14,12 +14,11 @@ jobs:
       - name: FTP Deploy
         uses: Wandalen/wretry.action@master
         with:
-          action: SamKirkland/FTP-Deploy-Action@master
+          action: SamKirkland/FTP-Deploy-Action@3.0.0
           with: |
             server: ${{ secrets.GHA_FTP_DOMAIN }}
             username: github-actions@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
             local-dir: ./src/
-            protocol: ftps
           attempt_limit: 10
           attempt_delay: 5000
