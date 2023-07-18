@@ -20,5 +20,6 @@ jobs:
             username: github-actions@jaredwebber.dev
             password: ${{ secrets.GHA_FTP_SECRET }}
             local-dir: ./src/
+            git-ftp-args: --all
           attempt_limit: 10
           attempt_delay: 5000
