@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: FTP Deploy
-        uses: Wandalen/wretry.action@e6cf3db7de3777ba5f999f903c2f4efdd9ac7288
+        uses: Wandalen/wretry.action@a163f62ae554a8f3cbe27b23db15b60c0ae2e93c
         with:
           action: SamKirkland/FTP-Deploy-Action@08c527ecdfa71f83a2ada7d562d6c794d036b168
           with: |
