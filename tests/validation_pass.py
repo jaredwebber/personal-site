@@ -162,6 +162,23 @@ class TestBrowser(unittest.TestCase):
 
         self.assertEqual("toggleColours()", button)
 
+    # @enhance_errors
+    # def test__validate_everyday_privacy_policy(self) -> None:
+    #     self.browser.get(URL + "/everyday-privacy-policy")
+    #     self.assertEqual(
+    #         """
+    #         Every Day Privacy Policy
+
+    #         Overview
+    #         We Collect No Personal Information Using Our Application
+    #         We do not collect, use, save, or have access to any of your personal data recorded. Data recorded in Every Day is stored on your device, and is not transferred.
+
+    #         Contact Us
+    #         If you have any questions about this Privacy Policy, feel free to get in touch at jaredwebberdev@gmail.com.
+    #         """,  # noqa: E501, W291
+    #         self.browser.find_element(By.TAG_NAME, "body").text,
+    #     )
+
 
 # Placeholder which forces TestBrowser to tearDown
 # Cycles the browser being tested
