@@ -39,10 +39,19 @@ def enhance_errors(func):
     return inner_function
 
 
+def visit_url(func, url=URL):
+    def inner_function(*args, **kwargs):
+        BrowserManager.browser.get(url)
+        func(*args, **kwargs)
+
+    return inner_function
+
+
 class BrowserManager:
     browser_index: int = 0
     browser_name: str = ""
     failures: bool = False
+    browser = None
 
     @classmethod
     def setup_chrome(cls) -> webdriver.Chrome:
@@ -68,13 +77,12 @@ class BrowserManager:
     @classmethod
     def get_next_browser(cls) -> list:
         browsers = [cls.setup_safari, cls.setup_chrome, cls.setup_firefox]
-        browser: webdriver = browsers[cls.browser_index]()
+        cls.browser: webdriver = browsers[cls.browser_index]()
         print("\nSetting Up " + cls.browser_name + "...")
         try_sleep()
-        browser.implicitly_wait(12)
-        browser.get(URL)
+        cls.browser.implicitly_wait(12)
         cls.browser_index += 1
-        return [browser, cls.browser_name]
+        return [cls.browser, cls.browser_name]
 
 
 class TestBrowser(unittest.TestCase):
@@ -92,16 +100,19 @@ class TestBrowser(unittest.TestCase):
             cls.browser.quit()
 
     @enhance_errors
+    @visit_url
     def test__validate_page_title(self) -> None:
         self.assertEqual("Jared Webber", self.browser.title)
 
     @enhance_errors
+    @visit_url
     def test__validate_card_title(self) -> None:
         self.assertEqual(
             "Jared Webber", self.browser.find_element(By.TAG_NAME, "h2").text
         )
 
     @enhance_errors
+    @visit_url
     def test__validate_github_link(self) -> None:
         self.assertEqual(
             "https://github.com/jaredwebber",
@@ -111,6 +122,7 @@ class TestBrowser(unittest.TestCase):
         )
 
     @enhance_errors
+    @visit_url
     def test__validate_linkedin_link(self) -> None:
         self.assertEqual(
             "https://www.linkedin.com/in/jaredwebber/",
@@ -120,6 +132,7 @@ class TestBrowser(unittest.TestCase):
         )
 
     @enhance_errors
+    @visit_url
     def test__validate_email_link(self) -> None:
         self.assertEqual(
             "mailto:jaredwebberdev@gmail.com",
@@ -129,6 +142,7 @@ class TestBrowser(unittest.TestCase):
         )
 
     @enhance_errors
+    @visit_url
     def test__validate_website_link(self) -> None:
         link = self.browser.find_element(
             By.LINK_TEXT, "jaredwebber.dev - you're here"
@@ -138,6 +152,7 @@ class TestBrowser(unittest.TestCase):
         )
 
     @enhance_errors
+    @visit_url
     def test__validate_number_of_elements(self) -> None:
         count = len(
             self.browser.find_element(By.TAG_NAME, "html").find_elements(
@@ -148,6 +163,7 @@ class TestBrowser(unittest.TestCase):
         self.assertTrue(count >= 44 and count <= 47)
 
     @enhance_errors
+    @visit_url
     def test__regenerate_button(self) -> None:
         button = self.browser.find_element(
             By.ID, "regenerate-background"
@@ -156,6 +172,7 @@ class TestBrowser(unittest.TestCase):
         self.assertEqual("regenerateBackground()", button)
 
     @enhance_errors
+    @visit_url
     def test__toggle_palette_button(self) -> None:
         button = self.browser.find_element(By.ID, "toggle-colours").get_attribute(
             "onclick"
@@ -164,6 +181,7 @@ class TestBrowser(unittest.TestCase):
         self.assertEqual("toggleColours()", button)
 
     @enhance_errors
+    @visit_url(URL + "/everyday-privacy-policy")
     def test__validate_everyday_privacy_policy(self) -> None:
         self.browser.get(URL + "/everyday-privacy-policy")
         self.assertEqual(
