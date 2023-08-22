@@ -80,6 +80,7 @@ class BrowserManager:
 class TestBrowser(unittest.TestCase):
     browser: webdriver = None
     browser_name: str = ""
+    maxDiff = None
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -176,8 +177,9 @@ class TestBrowser(unittest.TestCase):
             Contact Us
             If you have any questions about this Privacy Policy, feel free to get in touch at jaredwebberdev@gmail.com.
             """,  # noqa: E501, W291
-            self.browser.find_element(By.TAG_NAME, "body").text,
+            self.browser.find_element(By.ID, "body").text,
         )
+        self.browser.get(URL)
 
 
 # Placeholder which forces TestBrowser to tearDown
