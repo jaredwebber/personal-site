@@ -1,24 +1,26 @@
-on:
-  push:
-    branches:
-      - main
+# Disabled due to broken FTP-Deploy-Action
 
-name: Deploy Over FTP
-jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: FTP Deploy
-        uses: Wandalen/wretry.action@e6cf3db7de3777ba5f999f903c2f4efdd9ac7288
-        with:
-          action: SamKirkland/FTP-Deploy-Action@08c527ecdfa71f83a2ada7d562d6c794d036b168
-          with: |
-            server: ${{ secrets.GHA_FTP_DOMAIN }}
-            username: github-actions@jaredwebber.dev
-            password: ${{ secrets.GHA_FTP_SECRET }}
-            local-dir: ./src/
-          attempt_limit: 10
-          attempt_delay: 5000
+# on:
+#   push:
+#     branches:
+#       - main
+
+# name: Deploy Over FTP
+# jobs:
+#   deploy:
+#     name: Deploy
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: FTP Deploy
+#         uses: Wandalen/wretry.action@e6cf3db7de3777ba5f999f903c2f4efdd9ac7288
+#         with:
+#           action: SamKirkland/FTP-Deploy-Action@08c527ecdfa71f83a2ada7d562d6c794d036b168
+#           with: |
+#             server: ${{ secrets.GHA_FTP_DOMAIN }}
+#             username: github-actions@jaredwebber.dev
+#             password: ${{ secrets.GHA_FTP_SECRET }}
+#             local-dir: ./src/
+#           attempt_limit: 10
+#           attempt_delay: 5000

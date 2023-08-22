@@ -41,7 +41,7 @@ def enhance_errors(func):
 
 def visit_url(func, url=URL):
     def inner_function(*args, **kwargs):
-        BrowserManager.browser.get(url)
+        TestBrowser.browser.get(url)
         func(*args, **kwargs)
 
     return inner_function
@@ -51,7 +51,6 @@ class BrowserManager:
     browser_index: int = 0
     browser_name: str = ""
     failures: bool = False
-    browser = None
 
     @classmethod
     def setup_chrome(cls) -> webdriver.Chrome:
@@ -77,12 +76,12 @@ class BrowserManager:
     @classmethod
     def get_next_browser(cls) -> list:
         browsers = [cls.setup_safari, cls.setup_chrome, cls.setup_firefox]
-        cls.browser: webdriver = browsers[cls.browser_index]()
+        browser: webdriver = browsers[cls.browser_index]()
         print("\nSetting Up " + cls.browser_name + "...")
         try_sleep()
-        cls.browser.implicitly_wait(12)
+        browser.implicitly_wait(12)
         cls.browser_index += 1
-        return [cls.browser, cls.browser_name]
+        return [browser, cls.browser_name]
 
 
 class TestBrowser(unittest.TestCase):
