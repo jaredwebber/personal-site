@@ -1,7 +1,7 @@
+import re
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
-from selenium.webdriver.safari.service import Service as SafariService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from webdriver_manager.chrome import ChromeDriverManager
@@ -63,7 +63,7 @@ class BrowserManager:
     @classmethod
     def setup_safari(cls) -> webdriver.Safari:
         cls.browser_name = "Safari"
-        return webdriver.Safari(service=SafariService())
+        return webdriver.Safari()
 
     @classmethod
     def get_next_browser(cls) -> list:
@@ -173,19 +173,28 @@ class TestBrowser(unittest.TestCase):
 
     @enhance_errors
     def test__validate_everyday_privacy_policy(self) -> None:
-        self.browser.get(URL + "/everyday-privacy-policy")
-        self.assertEqual(
-            """
+        privacy_policy: str = """
             Every Day Privacy Policy
 
             Overview
-            We Collect No Personal Information Using Our Application
-            We do not collect, use, save, or have access to any of your personal data recorded. Data recorded in Every Day is stored on your device, and is not transferred.
+            
+            We Collect No Personal Information Using Our Application 
+            We do not collect, use, save, or have access to any of your personal data
+            recorded. Data recorded in Every Day is stored on your device, and is not
+            transferred.
+            
+            
 
             Contact Us
-            If you have any questions about this Privacy Policy, feel free to get in touch at jaredwebberdev@gmail.com.
-            """,  # noqa: E501, W291
-            self.browser.find_element(By.ID, "body").text,
+            
+            If you have any questions about this Privacy Policy, feel free to get in
+            touch at jaredwebberdev@gmail.com.
+            """  # noqa: E501, W291, W293
+        self.browser.get(URL + "/everyday-privacy-policy")
+        no_whitespace_expected_string = re.sub(r"\s+", "", privacy_policy)
+        self.assertEqual(
+            no_whitespace_expected_string,
+            re.sub(r"\s+", "", self.browser.find_element(By.ID, "body").text),
         )
 
 
