@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 #       - name: FTP Deploy
 #         uses: Wandalen/wretry.action@e6cf3db7de3777ba5f999f903c2f4efdd9ac7288
 #         with:
