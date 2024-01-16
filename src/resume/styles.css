@@ -7,12 +7,15 @@ body {
   height: 100vh;
   overflow: hidden;
   background-color: rgb(128, 128, 128); /* Match pdf background color */
+  font-family: "Montserrat", sans-serif;
+  font-size: 10pt;
 }
 
 .pdf-container {
   max-width: 1000px;
   width: 100%;
   height: 100%;
+  display: block;
 
   @media (max-width: 600px) {
     max-width: 100%;
@@ -23,4 +26,25 @@ body {
 embed {
   width: 100%;
   height: 100%;
+}
+
+.mobile-navigation-instructions {
+  visibility: hidden;
+  display: none;
+}
+
+@media (max-width: 600px) {
+  body {
+    display: block;
+    background-color: white;
+  }
+  .pdf-container {
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .mobile-navigation-instructions {
+    visibility: visible;
+    display: block;
+  }
 }
