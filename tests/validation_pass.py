@@ -98,18 +98,14 @@ class TestBrowser(unittest.TestCase):
     @enhance_errors
     def test__validate_card_title(self) -> None:
         self.browser.get(URL)
-        self.assertEqual(
-            "Jared Webber", self.browser.find_element(By.TAG_NAME, "h2").text
-        )
+        self.assertEqual("Jared Webber", self.browser.find_element(By.TAG_NAME, "h2").text)
 
     @enhance_errors
     def test__validate_github_link(self) -> None:
         self.browser.get(URL)
         self.assertEqual(
             "https://github.com/jaredwebber",
-            self.browser.find_element(
-                By.LINK_TEXT, "github.com/jaredwebber"
-            ).get_attribute("href"),
+            self.browser.find_element(By.LINK_TEXT, "github.com/jaredwebber").get_attribute("href"),
         )
 
     @enhance_errors
@@ -117,9 +113,7 @@ class TestBrowser(unittest.TestCase):
         self.browser.get(URL)
         self.assertEqual(
             "https://www.linkedin.com/in/jaredwebber/",
-            self.browser.find_element(
-                By.LINK_TEXT, "linkedin.com/in/jaredwebber"
-            ).get_attribute("href"),
+            self.browser.find_element(By.LINK_TEXT, "linkedin.com/in/jaredwebber").get_attribute("href"),
         )
 
     @enhance_errors
@@ -127,47 +121,33 @@ class TestBrowser(unittest.TestCase):
         self.browser.get(URL)
         self.assertEqual(
             "mailto:jaredwebberdev@gmail.com",
-            self.browser.find_element(
-                By.LINK_TEXT, "jaredwebberdev@gmail.com"
-            ).get_attribute("href"),
+            self.browser.find_element(By.LINK_TEXT, "jaredwebberdev@gmail.com").get_attribute("href"),
         )
 
     @enhance_errors
     def test__validate_website_link(self) -> None:
         self.browser.get(URL)
-        link = self.browser.find_element(
-            By.LINK_TEXT, "jaredwebber.dev - you're here"
-        ).get_attribute("href")
-        self.assertTrue(
-            link == "https://jaredwebber.dev/index.html" or link == "index.html"
-        )
+        link = self.browser.find_element(By.LINK_TEXT, "jaredwebber.dev - you're here").get_attribute("href")
+        self.assertTrue(link == "https://jaredwebber.dev/index.html" or link == "index.html")
 
     @enhance_errors
     def test__validate_number_of_elements(self) -> None:
         self.browser.get(URL)
-        count = len(
-            self.browser.find_element(By.TAG_NAME, "html").find_elements(
-                By.XPATH, ".//*"
-            )
-        )
+        count = len(self.browser.find_element(By.TAG_NAME, "html").find_elements(By.XPATH, ".//*"))
         # varies slightly by browser / load order
         self.assertTrue(count >= 44 and count <= 47)
 
     @enhance_errors
     def test__regenerate_button(self) -> None:
         self.browser.get(URL)
-        button = self.browser.find_element(
-            By.ID, "regenerate-background"
-        ).get_attribute("onclick")
+        button = self.browser.find_element(By.ID, "regenerate-background").get_attribute("onclick")
 
         self.assertEqual("regenerateBackground()", button)
 
     @enhance_errors
     def test__toggle_palette_button(self) -> None:
         self.browser.get(URL)
-        button = self.browser.find_element(By.ID, "toggle-colours").get_attribute(
-            "onclick"
-        )
+        button = self.browser.find_element(By.ID, "toggle-colours").get_attribute("onclick")
 
         self.assertEqual("toggleColours()", button)
 
