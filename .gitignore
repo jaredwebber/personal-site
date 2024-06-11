@@ -2,3 +2,4 @@ todo.md
 .vscode
 geckodriver.log
 .mypy_cache
+.venv
