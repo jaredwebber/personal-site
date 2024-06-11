@@ -1,11 +1,8 @@
 import re
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.by import By
 from time import sleep
 import unittest
@@ -17,8 +14,6 @@ DEFAULT_SLEEP: int = 1
 # safari doesnt support headless mode
 chrome_options = ChromeOptions()
 chrome_options.add_argument("--headless")
-firefox_options = FirefoxOptions()
-firefox_options.add_argument("--headless")
 
 
 def try_sleep(duration: int = DEFAULT_SLEEP) -> None:
@@ -53,21 +48,13 @@ class BrowserManager:
         )
 
     @classmethod
-    def setup_firefox(cls) -> webdriver.Firefox:
-        cls.browser_name = "Firefox"
-        return webdriver.Firefox(
-            service=FirefoxService(GeckoDriverManager().install()),
-            options=firefox_options,
-        )
-
-    @classmethod
     def setup_safari(cls) -> webdriver.Safari:
         cls.browser_name = "Safari"
         return webdriver.Safari()
 
     @classmethod
     def get_next_browser(cls) -> list:
-        browsers = [cls.setup_safari, cls.setup_chrome, cls.setup_firefox]
+        browsers = [cls.setup_safari, cls.setup_chrome]
         browser: webdriver = browsers[cls.browser_index]()
         print("\nSetting Up " + cls.browser_name + "...")
         try_sleep()
@@ -191,8 +178,6 @@ def suite() -> unittest.TestSuite:
     test_suite.addTests(loader.loadTestsFromTestCase(TestBrowser))  # Safari
     test_suite.addTests(loader.loadTestsFromTestCase(NextBrowser))
     test_suite.addTests(loader.loadTestsFromTestCase(TestBrowser))  # Chrome
-    test_suite.addTests(loader.loadTestsFromTestCase(NextBrowser))
-    test_suite.addTests(loader.loadTestsFromTestCase(TestBrowser))  # Firefox
     return test_suite
 
 
