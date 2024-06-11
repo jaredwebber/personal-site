@@ -148,7 +148,11 @@ class TestBrowser(unittest.TestCase):
             We Collect No Personal Information Using Our Application 
             We do not collect, use, save, or have access to any of your personal data
             recorded. Data recorded in Every Day is stored on your device, and is not
-            transfe
+            transferred.
+            
+            
+
+            Contact Us
             
             If you have any questions about this Privacy Policy, feel free to get in
             touch at jaredwebberdev@gmail.com.
