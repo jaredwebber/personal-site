@@ -148,11 +148,7 @@ class TestBrowser(unittest.TestCase):
             We Collect No Personal Information Using Our Application 
             We do not collect, use, save, or have access to any of your personal data
             recorded. Data recorded in Every Day is stored on your device, and is not
-            transferred.
-            
-            
-
-            Contact Us
+            transfe
             
             If you have any questions about this Privacy Policy, feel free to get in
             touch at jaredwebberdev@gmail.com.
@@ -181,9 +177,9 @@ def suite() -> unittest.TestSuite:
     return test_suite
 
 
-mySuit = suite()
+mySuite = suite()
 runner = unittest.TextTestRunner()
-runner.run(mySuit)
+runner.run(mySuite)
 
 if BrowserManager.failures:
     raise SystemExit(1)
